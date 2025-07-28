@@ -37,67 +37,67 @@ class FlightRadarService {
   }
 
   async getAirlineInfo(icao) {
-    return this.makeRequest(`/api/static/airlines/${icao}/light`);
+    return this.makeRequest(`/static/airlines/${icao}/light`);
   }
 
   async getAirportInfoLight(code) {
-    return this.makeRequest(`/api/static/airports/${code}/light`);
+    return this.makeRequest(`/static/airports/${code}/light`);
   }
 
   async getAirportInfoFull(code) {
-    return this.makeRequest(`/api/static/airports/${code}/full`);
+    return this.makeRequest(`/static/airports/${code}/full`);
   }
 
   async getLiveFlightPositionsLight(params) {
-    return this.makeRequest('/api/live/flight-positions/light', params);
+    return this.makeRequest('/live/flight-positions/light', params);
   }
 
   async getLiveFlightPositionsFull(params) {
-    return this.makeRequest('/api/live/flight-positions/full', params);
+    return this.makeRequest('/live/flight-positions/full', params);
   }
 
   async getLiveFlightPositionsCount(params) {
-    return this.makeRequest('/api/live/flight-positions/count', params);
+    return this.makeRequest('/live/flight-positions/count', params);
   }
 
   async getHistoricFlightPositionsFull(params) {
-    return this.makeRequest('/api/historic/flight-positions/full', params);
+    return this.makeRequest('/historic/flight-positions/full', params);
   }
 
   async getHistoricFlightPositionsLight(params) {
-    return this.makeRequest('/api/historic/flight-positions/light', params);
+    return this.makeRequest('/historic/flight-positions/light', params);
   }
 
   async getHistoricFlightPositionsCount(params) {
-    return this.makeRequest('/api/historic/flight-positions/count', params);
+    return this.makeRequest('/historic/flight-positions/count', params);
   }
 
   async getHistoricFlightEventsFull(params) {
-    return this.makeRequest('/api/historic/flight-events/full', params);
+    return this.makeRequest('/historic/flight-events/full', params);
   }
 
   async getHistoricFlightEventsLight(params) {
-    return this.makeRequest('/api/historic/flight-events/light', params);
+    return this.makeRequest('/historic/flight-events/light', params);
   }
 
   async getFlightSummaryFull(params) {
-    return this.makeRequest('/api/flight-summary/full', params);
+    return this.makeRequest('/flight-summary/full', params);
   }
 
   async getFlightSummaryLight(params) {
-    return this.makeRequest('/api/flight-summary/light', params);
+    return this.makeRequest('/flight-summary/light', params);
   }
 
   async getFlightSummaryCount(params) {
-    return this.makeRequest('/api/flight-summary/count', params);
+    return this.makeRequest('/flight-summary/count', params);
   }
 
   async getFlightTracks(flight_id) {
-    return this.makeRequest('/api/flight-tracks', { flight_id });
+    return this.makeRequest('/flight-tracks', { flight_id });
   }
 
   async getApiUsage(period) {
-    return this.makeRequest('/api/usage', { period });
+    return this.makeRequest('/usage', { period });
   }
 }
 
