@@ -3,7 +3,7 @@ const router = express.Router();
 const FlightRadarService = require('../services/flightRadarService');
 
 // Khởi tạo FlightRadarService với chế độ sandbox nếu không phải production
-const flightService = new FlightRadarService(process.env.NODE_ENV !== 'production');
+const flightService = new FlightRadarService(process.env.NODE_ENV !== 'development');
 
 // GET /api/static/airlines/{icao}/light
 router.get('/static/airlines/:icao/light', async (req, res) => {
