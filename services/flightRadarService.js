@@ -4,9 +4,9 @@ require('dotenv').config();
 const BASE_URL = process.env.FR24_BASE_URL;
 
 class FlightRadarService {
-  constructor(useSandbox = true) {
+  constructor() {
     console.log(`[DEBUG] Initializing FlightRadarService with useSandbox: ${useSandbox}`);
-    const apiKey = useSandbox ? process.env.FR24_API_KEY_SANDBOX : process.env.FR24_API_KEY_REAL;
+    const apiKey = process.env.FR24_API_KEY_REAL;
     if (!apiKey) {
       console.error('[ERROR] Flightradar24 API key not configured');
       throw new Error('Flightradar24 API key not configured');
