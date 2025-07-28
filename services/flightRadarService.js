@@ -4,7 +4,7 @@ require('dotenv').config();
 const BASE_URL = process.env.FR24_BASE_URL;
 
 class FlightRadarService {
-  constructor(useSandbox = false) {
+  constructor(useSandbox = true) {
     console.log(`[DEBUG] Initializing FlightRadarService with useSandbox: ${useSandbox}`);
     const apiKey = useSandbox ? process.env.FR24_API_KEY_SANDBOX : process.env.FR24_API_KEY_REAL;
     if (!apiKey) {
