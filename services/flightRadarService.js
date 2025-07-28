@@ -5,8 +5,8 @@ const BASE_URL = process.env.FR24_BASE_URL;
 
 class FlightRadarService {
   constructor(useSandbox = true) {
-    this.apiKey = useSandbox 
-      ? process.env.FR24_API_KEY_SANDBOX 
+    this.apiKey = useSandbox
+      ? process.env.FR24_API_KEY_SANDBOX
       : process.env.FR24_API_KEY_REAL;
   }
 
@@ -23,39 +23,81 @@ class FlightRadarService {
       return response.data;
     } catch (error) {
       console.error('FlightRadar API Error:', error.response?.data || error.message);
-      
       if (error.response) {
         if (error.response.status === 401) {
           throw new Error('Unauthorized: Invalid API token');
         } else if (error.response.status === 402) {
-          throw new Error('Insufficient credits: Please top up your account');
+          throw new Error('Forbidden: Credit limit reached. Please top up your account');
         } else if (error.response.status === 404) {
-          throw new Error('Resource not found');
+          throw new Error('Not found');
         }
       }
-      
       throw new Error('Failed to fetch data from Flightradar24 API');
     }
   }
 
-  async getLiveFlightPositions(bounds) {
-    return this.makeRequest('/live/flight-positions/light', { bounds });
+  async getAirlineInfo(icao) {
+    return this.makeRequest(`/api/static/airlines/${icao}/light`);
   }
 
-  async getFlightDetails(flightId) {
-    return this.makeRequest(`/live/flight/${flightId}/light`);
+  async getAirportInfoLight(code) {
+    return this.makeRequest(`/api/static/airports/${code}/light`);
   }
 
-  async getAirlineInfo(iataCode) {
-    return this.makeRequest(`/static/airlines/${iataCode}/light`);
+  async getAirportInfoFull(code) {
+    return this.makeRequest(`/api/static/airports/${code}/full`);
   }
 
-  async getAirportInfo(iataCode) {
-    return this.makeRequest(`/static/airports/${iataCode}/light`);
+  async getLiveFlightPositionsLight(params) {
+    return this.makeRequest('/api/live/flight-positions/light', params);
   }
 
-  async searchFlights(query) {
-    return this.makeRequest('/search/flights', { query });
+  async getLiveFlightPositionsFull(params) {
+    return this.makeRequest('/api/live/flight-positions/full', params);
+  }
+
+  async getLiveFlightPositionsCount(params) {
+    return this.makeRequest('/api/live/flight-positions/count', params);
+  }
+
+  async getHistoricFlightPositionsFull(params) {
+    return this.makeRequest('/api/historic/flight-positions/full', params);
+  }
+
+  async getHistoricFlightPositionsLight(params) {
+    return this.makeRequest('/api/historic/flight-positions/light', params);
+  }
+
+  async getHistoricFlightPositionsCount(params) {
+    return this.makeRequest('/api/historic/flight-positions/count', params);
+  }
+
+  async getHistoricFlightEventsFull(params) {
+    return this.makeRequest('/api/historic/flight-events/full', params);
+  }
+
+  async getHistoricFlightEventsLight(params) {
+    return this.makeRequest('/api/historic/flight-events/light', params);
+  }
+
+  async getFlightSummaryFull(params) {
+    return this.makeRequest('/api/flight-summary/full', params);
+  }
+
+  async getFlightSummaryLight(params) {
+    return this.makeRequest('/api/flight-summary/light', params);
+  }
+
+  async getFlightSummaryCount(params) {
+    return this.makeRequest('/api/flight-summary/count', params);
+  }
+
+  async getFlightTracks(flight_id) {
+    return this.makeRequest('/api/flight-tracks', { flight_id });
+  }
+
+  async getApiUsage(period) {
+    return this.makeRequest('/api/usage', { period });
   }
 }
 
