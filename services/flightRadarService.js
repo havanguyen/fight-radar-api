@@ -5,7 +5,6 @@ const BASE_URL = process.env.FR24_BASE_URL;
 
 class FlightRadarService {
   constructor() {
-    console.log(`[DEBUG] Initializing FlightRadarService with useSandbox: ${useSandbox}`);
     const apiKey = process.env.FR24_API_KEY_REAL;
     if (!apiKey) {
       console.error('[ERROR] Flightradar24 API key not configured');
