@@ -4,7 +4,12 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+const cors = require('cors');
+app.use(cors({
+  origin: '*', 
+  methods: ['GET'],
+  allowedHeaders: ['Accept', 'Accept-Version', 'Authorization']
+}));
 app.use(express.json());
 
 const flightRoutes = require('./routes/flights');
