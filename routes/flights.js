@@ -6,7 +6,7 @@ const FlightRadarService = require('../services/flightRadarService');
 const flightService = new FlightRadarService(process.env.NODE_ENV !== 'production');
 
 // GET /api/static/airlines/{icao}/light
-router.get('/airlines/:icao', async (req, res) => {
+router.get('/static/airlines/:icao/light', async (req, res) => {
   try {
     const icao = req.params.icao;
     if (!icao || !/^[A-Z0-9]{3}$/.test(icao)) {
@@ -23,7 +23,7 @@ router.get('/airlines/:icao', async (req, res) => {
 });
 
 // GET /api/static/airports/{code}/light
-router.get('/airports/:code/light', async (req, res) => {
+router.get('/static/airports/:code/light', async (req, res) => {
   try {
     const code = req.params.code;
     if (!code || !/^[A-Z0-9]{3,4}$/.test(code)) {
@@ -40,7 +40,7 @@ router.get('/airports/:code/light', async (req, res) => {
 });
 
 // GET /api/static/airports/{code}/full
-router.get('/static/airports/:code/light', async (req, res) => {
+router.get('/static/airports/:code/full', async (req, res) => {
   try {
     const code = req.params.code;
     if (!code || !/^[A-Z0-9]{3,4}$/.test(code)) {
@@ -49,10 +49,10 @@ router.get('/static/airports/:code/light', async (req, res) => {
         details: 'The code is not a valid IATA or ICAO code.'
       });
     }
-    const airportInfo = await flightService.getAirportInfoLight(code);
+    const airportInfo = await flightService.getAirportInfoFull(code);
     res.json(airportInfo);
   } catch (error) {
-    console.error('Route error:', error.message); // Thêm log
+    console.error('Route error:', error.message);
     res.status(500).json({ error: error.message });
   }
 });

@@ -20,12 +20,23 @@ app.get('/', (req, res) => {
     baseUrl: process.env.FR24_BASE_URL || 'https://fr24api.flightradar24.com',
     documentation: 'https://github.com/havanguyen/fight-radar-api',
     availableEndpoints: [
-      '/api/static/airlines/:icao/light',
-      '/api/static/airports/:code/light',
-      '/api/static/airports/:code/full',
-      '/api/live/flight-positions/light',
-      '/api/usage'
-    ]
+  '/api/static/airlines/:icao/light',
+  '/api/static/airports/:code/light',
+  '/api/static/airports/:code/full',
+  '/api/live/flight-positions/light',
+  '/api/live/flight-positions/full',
+  '/api/live/flight-positions/count',
+  '/api/historic/flight-positions/full',
+  '/api/historic/flight-positions/light',
+  '/api/historic/flight-positions/count',
+  '/api/historic/flight-events/full',
+  '/api/historic/flight-events/light',
+  '/api/flight-summary/full',
+  '/api/flight-summary/light',
+  '/api/flight-summary/count',
+  '/api/flight-tracks',
+  '/api/usage'
+  ]
   });
 });
 
