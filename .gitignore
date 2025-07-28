@@ -9,5 +9,5 @@ build/
 .vscode/
 .idea/
 
-.DS_Store       # macOS
-Thumbs.db       # Windows
+.DS_Store      
+Thumbs.db       
