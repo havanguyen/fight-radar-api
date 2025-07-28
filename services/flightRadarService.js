@@ -5,13 +5,12 @@ const BASE_URL = process.env.FR24_BASE_URL;
 
 class FlightRadarService {
   constructor(useSandbox = true) {
-    if (!process.env.FR24_API_KEY_SANDBOX || !process.env.FR24_API_KEY_REAL) {
-      throw new Error('Flightradar24 API keys not configured');
+    const apiKey = useSandbox ? process.env.FR24_API_KEY_SANDBOX : process.env.FR24_API_KEY_REAL;
+    if (!apiKey) {
+      throw new Error('Flightradar24 API key not configured');
     }
-
-    this.apiKey = useSandbox
-      ? process.env.FR24_API_KEY_SANDBOX
-      : process.env.FR24_API_KEY_REAL;
+    const [id, key] = apiKey.split('|');
+    this.apiKey = key;
   }
 
   async makeRequest(endpoint, params = {}) {
