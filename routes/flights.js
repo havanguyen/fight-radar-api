@@ -40,7 +40,7 @@ router.get('/airports/:code/light', async (req, res) => {
 });
 
 // GET /api/static/airports/{code}/full
-router.get('/airports/:code/full', async (req, res) => {
+router.get('/static/airports/:code/light', async (req, res) => {
   try {
     const code = req.params.code;
     if (!code || !/^[A-Z0-9]{3,4}$/.test(code)) {
@@ -49,9 +49,10 @@ router.get('/airports/:code/full', async (req, res) => {
         details: 'The code is not a valid IATA or ICAO code.'
       });
     }
-    const airportInfo = await flightService.getAirportInfoFull(code);
+    const airportInfo = await flightService.getAirportInfoLight(code);
     res.json(airportInfo);
   } catch (error) {
+    console.error('Route error:', error.message); // Thêm log
     res.status(500).json({ error: error.message });
   }
 });
