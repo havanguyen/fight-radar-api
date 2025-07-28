@@ -6,7 +6,7 @@ const FlightRadarService = require('../services/flightRadarService');
 const flightService = new FlightRadarService(process.env.NODE_ENV !== 'production');
 
 // GET /api/static/airlines/{icao}/light
-router.get('/static/airlines/:icao/light', async (req, res) => {
+router.get('/airlines/:icao', async (req, res) => {
   try {
     const icao = req.params.icao;
     if (!icao || !/^[A-Z0-9]{3}$/.test(icao)) {
@@ -18,8 +18,7 @@ router.get('/static/airlines/:icao/light', async (req, res) => {
     const airlineInfo = await flightService.getAirlineInfo(icao);
     res.json(airlineInfo);
   } catch (error) {
-    const status = error.message.includes('not found') ? 404 : 500;
-    res.status(status).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 });
 
