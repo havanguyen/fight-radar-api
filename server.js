@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 const flightRoutes = require('./routes/flights');
-app.use('/api/flights', flightRoutes);
+app.use('/api', flightRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
